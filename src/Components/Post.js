@@ -1,5 +1,5 @@
 import axios from "axios"
-import { fetchPostsRequest, fetchPostsSuccess, fetchPostsFailure } from "../redux/actions/apiActions"
+import { fetchPosts } from "../redux/actions/apiActions"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -10,11 +10,8 @@ const Post = () => {
     console.log(loading, posts, error)
 
     useEffect(() => {
-         dispatch(fetchPostsRequest())
-         axios.get("https://gauravgitacc.github.io/postAppData/posts.json")
-         .then(res => dispatch(fetchPostsSuccess(res.data)))
-         .catch(err => dispatch(fetchPostsFailure(err.message)))
-
+        dispatch(fetchPosts())
+   
     },[])
 
 
@@ -40,3 +37,7 @@ const Post = () => {
 }
 
 export default Post
+
+
+
+

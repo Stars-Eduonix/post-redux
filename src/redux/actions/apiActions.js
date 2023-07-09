@@ -1,5 +1,5 @@
 import {FETCH_POSTS_REQUEST, FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILURE} from './actionTypes' 
-
+import axios from 'axios'
 
 export const fetchPostsRequest = () => {
     return {
@@ -20,3 +20,16 @@ export const fetchPostsFailure = (error) => {
         payload: error
     }
 }
+
+
+
+// special action cretor which returns a function instead of an action
+export function fetchPosts(){
+     return  function(dispatch){
+        dispatch(fetchPostsRequest())
+        axios.get("https://gauravgitacc.github.io/postAppData/posts.json")
+        .then(res => dispatch(fetchPostsSuccess(res.data)))
+        .catch(err => dispatch(fetchPostsFailure(err.message)))
+    }
+}
+    
